@@ -2,6 +2,7 @@ import React from 'react'
 import { AppBar, Box, Container, Button, Typography, makeStyles, Toolbar } from '@material-ui/core'
 import { Link } from "react-router-dom";
 import { Hidden } from '@material-ui/core';
+import { useAuthContext } from '../../context/authContext';
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -24,6 +25,11 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = () => {
   const classes = useStyles()
+  const { currentUser, logout, user } = useAuthContext()
+  const handleLogout = async () => {
+    await logout()
+  }
+
   return (
     <AppBar className={classes.appbar} position='static'>
       <Container>
@@ -35,7 +41,8 @@ const Navbar = () => {
               <Link to='/'>Blog</Link>
               <Link to='/'>About</Link>
               <Link to='/'>Contact</Link>
-              <Button component={Link} to='/login'>Login</Button>
+              {user?.role === 'admin' && <Link to='/dashboard'>Dashboard</Link>}
+              {currentUser ? <Button onClick={handleLogout}>Logout</Button> : <Button component={Link} to='/login'>Login</Button>}
             </Box>
           </Hidden>
         </Toolbar>

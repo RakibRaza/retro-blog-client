@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import BlogDetails from "./pages/BlogDetails";
 import Login from './pages/Login'
 import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path='/signup'>
             <Signup />
+          </Route>
+          <Route path='/dashboard'>
+            <Dashboard />
           </Route>
           <Route path="/blog/:id">
             <BlogDetails />
