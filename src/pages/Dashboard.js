@@ -1,4 +1,4 @@
-import { Container, Grid, Box, Avatar, Typography, Paper, TextField, Button, makeStyles } from '@material-ui/core'
+import { Container, Grid, Box, Avatar, Typography, TextField, Button, makeStyles } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuthContext } from '../context/authContext'
@@ -53,6 +53,7 @@ const Dashboard = () => {
         }
       );
       if (res.data) {
+        fetchBlogs()
         setLoading(true);
         reset();
       }
@@ -64,6 +65,12 @@ const Dashboard = () => {
     const res = await axios.get(`https://pwr-retro-blog-server.herokuapp.com/blogs`)
     setBlogs(res.data)
   }
+  const deleteBlog = async (id) => {
+    const res = await axios.delete(`https://pwr-retro-blog-server.herokuapp.com/deleteBlog/${id}`)
+    if (res.data) {
+      fetchBlogs()
+    }
+  }
 
   useEffect(() => {
     fetchBlogs()
@@ -73,7 +80,7 @@ const Dashboard = () => {
       {/* Profile card */}
       <Grid container spacing={4} alignItems='center'>
         <Grid item xs={12} sm={6} md={5}>
-          <Box component={Paper} p={5} align="center">
+          <Box borderRadius={20} style={{ boxShadow: '0 1rem 3rem rgb(0 0 0 / 18%)' }} p={5} align="center">
             <Avatar
               alt={user?.name}
               src={currentUser?.photoURL}
@@ -117,15 +124,15 @@ const Dashboard = () => {
         </Grid>
       </Grid>
 
-      <Grid container>
+      <Grid container spacing={4}>
         {blogs.map((blog) => (
           <Grid key={blog._id} item xs={12} sm={6} md={4}>
-            <Box p={3}>
+            <Box borderRadius={20} style={{ boxShadow: '0 1rem 3rem rgb(0 0 0 / 18%)', position: 'relative', zIndex: 'tooltip' }} p={3}>
               <Typography variant="h5" align="center">
                 {blog.title}
               </Typography>
               <Box align='center' mt={2}>
-                <Button>Delete</Button>
+                <Button onClick={() => deleteBlog(blog._id)} variant='contained' color='secondary'>Delete</Button>
               </Box>
             </Box>
           </Grid>

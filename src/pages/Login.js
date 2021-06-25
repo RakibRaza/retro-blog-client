@@ -33,7 +33,7 @@ const Login = () => {
             <TextField {...register('email', { required: true })} label='Email' margin='normal' fullWidth />
             <TextField type='password' {...register('password', { required: true })} label='Password' margin='normal' fullWidth />
             <Box my={3}>
-              <Button type='submit' variant='contained' fullWidth>Login</Button>
+              <Button type='submit' color='primary' variant='contained' fullWidth>Login</Button>
             </Box>
             <Typography align='center'>Don't have an account ? <Link to='/signup'>Create an account</Link></Typography>
           </form>

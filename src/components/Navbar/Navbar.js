@@ -25,9 +25,10 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = () => {
   const classes = useStyles()
-  const { currentUser, logout, user } = useAuthContext()
+  const { currentUser, logout, user, setUser } = useAuthContext()
   const handleLogout = async () => {
     await logout()
+    setUser({})
   }
 
   return (

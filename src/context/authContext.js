@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
     return unSubscribe
   }, [])
 
-  const value = { signup, login, logout, currentUser, user }
+  const value = { signup, login, logout, currentUser, user, setUser }
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>
 }
 

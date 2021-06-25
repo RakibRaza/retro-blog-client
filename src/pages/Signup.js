@@ -41,7 +41,7 @@ const Signup = () => {
             <TextField {...register('email', { required: true })} label='Email' margin='normal' fullWidth />
             <TextField {...register('password', { required: true })} type='password' label='Password' margin='normal' fullWidth />
             <Box my={3}>
-              <Button type='submit' variant='contained' fullWidth>Create an account</Button>
+              <Button type='submit' color='primary' variant='contained' fullWidth>Create an account</Button>
             </Box>
             <Typography align='center'>Already have an account ? <Link to='/login'>Login</Link></Typography>
           </form>

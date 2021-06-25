@@ -1,13 +1,23 @@
 import { Grid, Box } from '@material-ui/core'
-import React from 'react'
-import data from '../../data/blogs'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Blog from './Blog'
 
 const Blogs = () => {
+  const [blogs, setBlogs] = useState([])
+
+
+  const fetchBlogs = async () => {
+    const res = await axios.get(`https://pwr-retro-blog-server.herokuapp.com/blogs`)
+    setBlogs(res.data)
+  }
+  useEffect(() => {
+    fetchBlogs()
+  }, [])
   return (
     <Box py={10}>
       <Grid container spacing={4}>
-        {data.map(blog => <Blog key={blog.id} {...blog} />)}
+        {blogs.map((blog, index) => <Blog index={index} key={blog.id} {...blog} />)}
       </Grid>
     </Box>
   )
