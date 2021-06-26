@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppBar, Box, Container, Button, Typography, makeStyles, Toolbar } from '@material-ui/core'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Hidden } from '@material-ui/core';
 import { useAuthContext } from '../../context/authContext';
 
@@ -25,10 +25,12 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = () => {
   const classes = useStyles()
+  const history = useHistory()
   const { currentUser, logout, user, setUser } = useAuthContext()
   const handleLogout = async () => {
     await logout()
     setUser({})
+    history.replace('/')
   }
 
   return (
